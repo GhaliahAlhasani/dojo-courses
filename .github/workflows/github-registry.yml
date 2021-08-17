@@ -1,9 +1,10 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI for docker dojo-courses-frontend
+name: CI for docker hello_flask_sql
 
 # Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the step4 branch
   push:
     branches: [main]
 
@@ -46,7 +47,7 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
-
+      # Pushing
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
@@ -55,7 +56,7 @@ jobs:
           file: ./frontend/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ghcr.io/${{ secrets.DOCKER_HUB_USERNAME }}/dojo-courses-frontend:latest
+          tags: ghcr.io/${{ github.repository_owner }}/dojo-courses-frontend:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 
