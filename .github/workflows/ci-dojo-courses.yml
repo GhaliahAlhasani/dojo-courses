@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI for docker dojo-courses-pg
+name: CI for docker dojo-courses-frontend
 
 # Controls when the workflow will run
 on:
@@ -46,7 +46,7 @@ jobs:
           context: ./
           file: ./frontend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/dojo-courses-pg:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/dojo-courses-frontend:latest
 
       # Runs a set of commands using the runners shell
       - name: Image digest
